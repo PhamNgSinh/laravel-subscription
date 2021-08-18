@@ -13,16 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::group(['namespace' => 'Subscriptions'], function() {
-    Route::get('plans', 'SubscriptionController@index')->name('plans');
+    Route::resource('plans', 'SubscriptionController');
     Route::middleware(['auth'])->group(function () {
         Route::get('/payments', 'PaymentController@index')->name('payments');
         Route::post('/payments', 'PaymentController@store')->name('payments.store');
     });
    
 });
-    Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->group(function () {
         Route::resource('users', 'UserController');
-    });
+});
    
 
 Route::get('/', function () {
@@ -32,4 +32,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
 
